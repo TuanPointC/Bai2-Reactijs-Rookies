@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import ListWelcome from './ListWelcome';
+import Counter from './Counter';
+import Checkbox from './Checkbox';
+import { useState } from 'react'
+import SelectPage from './SelectPage';
 
 function App() {
+  const [value, setValue] = useState("Welcome")
+
+  const getPage = () => {
+    switch (value) {
+      case "Welcome":
+        return <ListWelcome />
+      case "Counter":
+        return <Counter />
+      case "Checkbox":
+        return <Checkbox />
+      default:
+        return <div>Not found!</div>
+
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App">    
+      <SelectPage value={value} setValue={setValue}/>
+      {getPage()}
     </div>
   );
 }
